@@ -12,6 +12,11 @@ params = [
     {'method': 'DELETE'}
 ]
 
+request = requests.get(url)
+print(request.text)
+request = requests.head(url, data={'method': 'HEAD'})
+print(request.text)
+
 for get, param in product(method_get, params):
     req = requests.Request(get, url, params=param)
     prepared = req.prepare()
@@ -25,5 +30,3 @@ for method, param in product(methods, params):
     with requests.Session() as session:
         response = session.send(prepared)
     print(prepared.method, param, response.text)
-
-
